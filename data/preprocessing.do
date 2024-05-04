@@ -47,7 +47,7 @@ rename a9 rural_urban_dummy
 
 . drop c_1910 d136 d146 E131 E141 E171 E132 E142 E172 E133 E143 E153 E173 E183 E134 E144 E174 E135 E145 E155
 
-. drop E175 E185 E136 E146 E176 E137 E147 E157 E177 E138 E148 E158 E168 E178 E188 E139 E149 E159 E179 
+. drop E175 E185 E136 E146 E176 E137 E147 E177 E138 E148 E178 E188 E139 E149 E159 E179 
 
 rename E181 male_wages
 rename E182 female_wages
@@ -59,11 +59,15 @@ rename E151 male_days
 rename E152 female_days
 rename E154 contrac_days
 rename E156 super_manag_days
+rename E158 unpaid_days
+rename E157 other_days
+
 
 rename E161 male_no
 rename E162 female_no
 rename E164 contrac_no
 rename E166 super_manag_no
+rename E168 unpaid_fam
 
 rename E189 total_wages
 gen sub_total_super_other = sub_total_employees + super_manag_no + other_employees
@@ -71,20 +75,21 @@ gen sub_total_super = sub_total_employees + super_manag_no
 gen sub_total_super_other_contrac = sub_total_super_other + contrac_no
 . rename F3 operating_expenses
 
-. drop F1 F2A F2B
+. drop F1 
+
 
 . rename F7 r_and_d_expenses
 
 gen total_expenses = operating_expenses + r_and_d_expenses
 gen workcap_emp_ratio = working_capital/sub_total_employees
 
-gen lab_exp_ratio = total_wages/total_expenses
 gen female_male_ratio = female_no/male_no
 gen sub_total_wages = male_wages + female_wages
 gen sub_total_super_wages = sub_total_wages + super_manag_wages
 gen sub_total_super_other_wages = sub_total_super_wages + other_emp_wages
 gen sub_total_super_other_contrac_w = sub_total_super_other_wages + contrac_wages
 gen sub_total_days = male_days + female_days
+gen total_days = male_days + female_days + super_manag_days + contrac_days + other_days
 
 gen avg_salary_male = male_wages/male_no
 gen avg_salary_female = female_wages/female_no
@@ -94,8 +99,15 @@ gen avg_salary_sub_total = sub_total_wages/sub_total_employees
 gen avg_salary_other_emp = other_emp_wages/other_employees
 
 gen contrac_to_total = contrac_no/sub_total_super_other_contrac
+gen lab_exp_ratio = total_wages/sub_total_super_other_contrac_w
+gen avg_wage_female_to_male = avg_salary_female/avg_salary_male
+gen female_to_total_wage = female_wages/sub_total_wages
+gen final_expenses = F2A + F2B + operating_expenses + F4 + F5 + F6 + F8 + F9 + F10 
+gen lab_exp_ratio_new = total_wages/final_expenses
+gen contrac_to_total_mandays = contrac_days/total_days
 
-. drop F4 F5 F6 F8 F9 F10 F11 G1 G2 G3 G4 G5 G6 G7 G8 G9 G10 G11 G12
+
+. drop F11 G1 G2 G3 G4 G5 G6 G7 G8 G9 G10 G11 G12
 
 . drop H131 H141 H151 H161 H171 H132 H142 H152 H162 H172 H133 H143 H153 H163 H173 H134 H144 H154 H164 H174 H135 H145 H155 H165 H175 H136 H146 H156 H166 H176 H137 H147 H157 H167 H177 H138 H148 H158 H168 H178 H139 H149 H159 H169 H179 H1310 H1410 H1510 H1610 H1710 H1311 H1411 H1511 H1611 H1711 H1312 H1412 H1512 H1612 H1712 H1313 H1413 H1513 H1613 H1713 H1314 H1414 H1514 H1614 H1714 H1315 H1415 H1515 H1615 H1715 H1316 H1416 H1516 H1616 H1716 H1317 H1417 H1517 H1617 H1717 H1318 H1418 H1518 H1618 H1718 H1319 H1419 H1519 H1619 H1719 H1320 H1420 H1520 H1620 H1720 H1321 H1421 H1521 H1621 H1721 H1322 H1422 H1522 H1622 H1722 H1323 H1423 H1523 H1623 H1723 H1324 H1424 H1524 H1624 H1724
 
