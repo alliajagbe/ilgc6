@@ -6,9 +6,8 @@ The research is closely aligned with Sustainable Development Goals (SDGs) 8 and 
 
 Key findings indicate that the application of labour laws to firms with more than 100 employees does not significantly affect productivity, rather, the firms are strategically manoeuvring to mitigate the impact of these laws for instance hiring more contractual and female labour as these strategies offset the increased cost of hiring while maintaining the same level of productivity.
 
-### Team
+### Team (Mentored by Professor Kriti Khanna)
 - Alli Ajagbe
 - Khushi Goel
 - Shaurya Sighardia
 - Suhani Jain
-Mentored by: Professor Kriti Khanna
